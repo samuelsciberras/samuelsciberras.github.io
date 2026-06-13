@@ -46,8 +46,9 @@ header {
 
 .header-left {
   display: flex;
-  align-items: center;
-  gap: 18px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   flex: 1;
   min-width: 0;
 }
@@ -65,18 +66,27 @@ header {
   font-weight: 600;
 }
 
-.header-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-  text-align: right;
+.header-details {
   font-size: 0.95rem;
 }
 
+.print-only {
+  display: none;
+}
+
+.header-right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 0 0 auto;
+}
+
 .header-photo {
-  width: 92px;
-  height: 92px;
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 150px;
+  max-width: 150px;
   border-radius: 8px;
   object-fit: cover;
   border: 1px solid var(--border);
@@ -93,12 +103,10 @@ section {
 }
 
 .section-title {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--heading);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .summary {
@@ -107,19 +115,21 @@ section {
 
 .job {
   margin-bottom: 28px;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .job-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.job-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--heading);
+.job-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
 }
 
 .company {
@@ -128,8 +138,14 @@ section {
 }
 
 .period {
-  color: var(--muted);
+  color: #9ca3af;
   white-space: nowrap;
+}
+
+.job-role {
+  color: var(--heading);
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 ul {
@@ -174,20 +190,158 @@ li {
   text-decoration: none;
 }
 
+@page {
+  size: Letter;
+  margin: 0.65in;
+}
+
 @media print {
+  html {
+    font-size: 12px;
+  }
+
   body {
     background: white;
+    line-height: 1.42;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .cv {
     margin: 0;
     width: auto;
     min-height: auto;
+    padding: 0;
     box-shadow: none;
   }
-}
 
-@page {
-  size: A4;
-  margin: 0;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 26px;
+    padding-bottom: 13px;
+    margin-bottom: 16px;
+  }
+
+  .header-left {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    min-width: 0;
+  }
+
+  .header-right {
+    display: flex;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+
+  .header-photo {
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: 150px;
+    max-width: 150px;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+
+  .header-identity h1 {
+    font-size: 1.8rem;
+  }
+
+  .header-identity .title {
+    margin-top: 3px;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .header-details {
+    font-size: 0.9rem;
+  }
+
+  .screen-only {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  section {
+    margin: 0 0 17px;
+    padding: 0;
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .section-title {
+    margin: 0 0 10px;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .summary,
+  .job-description {
+    margin-top: 0;
+    margin-bottom: 9px;
+  }
+
+  .job {
+    margin: 0 0 18px;
+    padding: 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .job-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0 0 5px;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .job-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 26px;
+  }
+
+  .period {
+    margin-top: 1px;
+    color: #9ca3af;
+    white-space: normal;
+  }
+
+  .job-role {
+    color: var(--heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  ul {
+    margin-top: 7px;
+    margin-bottom: 8px;
+    padding-left: 16px;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  .tech-stack,
+  .education-item {
+    margin-bottom: 10px;
+  }
 }
